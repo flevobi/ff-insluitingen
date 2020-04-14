@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faillissementen per week per provincie</title>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+
+<body>
+  <style>
+    h1 {
+      font-family: 'Fire sans', sans-serif;
+      font-size: 17px;
+    }
+    #vis {
+      width: 545px;
+    }
+  </style>
+  <h1 id="kop">Faillissementen per week per provincie</h1>
+  <div id="vis"></div>
+
+  <script type="text/javascript">
+    var yourVlSpec = "failissement_bullet_spec.json";
+    vegaEmbed('#vis', yourVlSpec, {
+      "renderer": "svg",
+      "logLevel": "vega.Info"
+    });
+  </script>
+</body>
+
+</html>

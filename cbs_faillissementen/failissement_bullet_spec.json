@@ -1,0 +1,87 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.0.2.json",
+    "autosize": {
+        "type": "fit",
+        "contains": "padding"
+    },
+    "config": {
+        "circle": {
+            "color": "rgb(0, 103, 177)"
+        }
+    },
+    "data": {
+        "url": "cbs_faillissementen_per_week.csv"
+    },
+    "selection": {
+        "highlight": {
+            "type": "single",
+            "encodings": [
+                "y"
+            ],
+            "on": "mouseover",
+            "empty": "none",
+            "init": {"y": "Flevoland"}
+        }
+    },
+    "mark": "circle",
+    "encoding": {
+        "size": {
+            "type": "quantitative",
+            "field": "aantal",
+            "legend": {
+                "titleFont": "sans-serif",
+                "titleFontSize": 12,
+                "titleFontWeight": "normal",
+                "titleColor": "gray",
+                "labelFont": "sans-serif",
+                "labelFontSize": 12,
+                "labelColor": "gray"
+            }
+        },
+        "tooltip": [
+            {
+                "type": "nominal",
+                "field": "provincie"
+            },
+            {
+                "type": "nominal",
+                "field": "week"
+            },
+            {
+                "type": "quantitative",
+                "field": "aantal"
+            }
+        ],
+        "x": {
+            "type": "nominal",
+            "field": "week",
+            "sort": [ "1", "2", "3", "4", "5", "6", "7", "8", "9" ],
+            "axis": {
+                "labelFont": "sans-serif",
+                "labelFontSize": 12,
+                "labelAngle": 0,
+                "labelColor": "gray",
+                "titleFont": "sans-serif",
+                "titleFontSize": 12,
+                "titleFontWeight": "normal",
+                "titleColor": "gray"
+            }
+        },
+        "y": {
+            "type": "nominal",
+            "field": "provincie",
+            "axis": {
+                "labelFont": "sans-serif",
+                "title": null,
+                "labelFontSize": 12,
+                "labelColor": "gray"
+            } 
+        },
+        "color": {
+             "condition": {
+                "selection": "highlight",
+                "value": "rgb(158, 25, 129)"
+            }
+        }
+    }
+}
