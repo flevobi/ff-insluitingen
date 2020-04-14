@@ -1,13 +1,12 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v4.0.2.json",
+    "$schema": "https://vega.github.io/schema/vega-lite/v3.4.0.json",
     "autosize": {
-        "type": "fit",
         "contains": "padding"
     },
     "config": {
         "circle": {
             "color": "rgb(0, 103, 177)"
-        }
+        }, 
     },
     "data": {
         "url": "cbs_faillissementen_per_week.csv"
@@ -63,18 +62,32 @@
                 "labelColor": "gray",
                 "titleFont": "sans-serif",
                 "titleFontSize": 12,
-                "titleFontWeight": "normal",
-                "titleColor": "gray"
+                "titleFontWeight": "normal"
             }
         },
         "y": {
             "type": "nominal",
             "field": "provincie",
+            "sort": [
+                "Groningen",
+                "Friesland",
+                "Drenthe",
+                "Overijssel",
+                "Flevoland",
+                "Gelderland",
+                "Utrecht",
+                "Noord-Holland",
+                "Zuid-Holland",
+                "Zeeland",
+                "Noord-Brabant",
+                "Limburg"
+            ],
             "axis": {
                 "labelFont": "sans-serif",
                 "title": null,
                 "labelFontSize": 12,
-                "labelColor": "gray"
+                "labelAlign": "left",
+                "labelPadding": 90
             } 
         },
         "color": {
