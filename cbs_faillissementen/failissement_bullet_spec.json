@@ -6,7 +6,7 @@
     "config": {
         "circle": {
             "color": "rgb(0, 103, 177)"
-        }, 
+        } 
     },
     "data": {
         "url": "cbs_faillissementen_per_week.csv"
