@@ -1,0 +1,75 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v3.4.0.json",
+    "autosize": {
+        "contains": "padding"
+    },
+    "config": {
+        "view": {
+            "stroke": null
+        },
+        "bar": {
+            "color": "rgb(0, 103, 177)"
+        }
+    },
+    "data": {
+        "url": "cbs_faillissementen_per_week.csv"
+    },
+      "transform": [
+     {
+      "filter": "datum.provincie == 'Flevoland'"
+    }
+  ],
+    "selection": {
+        "highlight": {
+            "type": "single",
+            "encodings": [
+                "x"
+            ],
+            "on": "mouseover",
+            "empty": "none"
+        }
+    },
+    "mark": "bar",
+    "encoding": {
+        "tooltip": [
+            {
+                "type": "nominal",
+                "field": "week"
+            },
+            {
+                "type": "quantitative",
+                "field": "aantal"
+            }
+        ],
+        "x": {
+            "type": "nominal",
+            "field": "week",
+            "sort": [ "1", "2", "3", "4", "5", "6", "7", "8", "9" ],
+            "axis": {
+                "labelFont": "sans-serif",
+                "labelFontSize": 12,
+                "labelAngle": 0,
+                "labelColor": "gray",
+                "title": "weeknr",
+                "titleFont": "sans-serif",
+                "titleFontSize": 12,
+                "titleFontWeight": "normal"
+            }
+        },
+        "y": {
+            "type": "quantitative",
+            "field": "aantal",
+            "axis": {
+                "labelFont": "sans-serif",
+                "title": null,
+                "labelFontSize": 12
+            } 
+        },
+        "color": {
+             "condition": {
+                "selection": "highlight",
+                "value": "rgb(158, 25, 129)"
+            }
+        }
+    }
+}

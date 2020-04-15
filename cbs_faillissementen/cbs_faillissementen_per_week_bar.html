@@ -17,8 +17,8 @@
       padding-left: 30px;
     }
     h1 {
-      padding-top: 35px;
       padding-left: 8px;
+      padding-top: 35px;
       font-size: 17px;
     }
     #vis {
@@ -31,13 +31,13 @@
       color: black;
     }
   </style>
-  <h1 id="kop">Faillissementen per week in 2020 per provincie</h1>
+  <h1 id="kop">Faillissementen per week in 2020 in Flevoland</h1>
   <div id="vis"></div>
   <br>
   <a id="bron" href="https://www.cbs.nl/nl-nl/maatwerk/2020/14/faillissementen-bedrijven-en-instellingen-2020" target="_blank">bron: CBS</a>
 
   <script type="text/javascript">
-    var yourVlSpec = "failissementen_bullet_spec.json";
+    var yourVlSpec = "failissementen_bar_spec.json";
     vegaEmbed('#vis', yourVlSpec, {'actions': false, 'renderer': 'svg'}).then(function(result) {
       console.log(result);
     }).catch(console.error);

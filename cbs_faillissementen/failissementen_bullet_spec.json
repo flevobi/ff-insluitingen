@@ -60,6 +60,7 @@
                 "labelFontSize": 12,
                 "labelAngle": 0,
                 "labelColor": "gray",
+                "title": "weeknr",
                 "titleFont": "sans-serif",
                 "titleFontSize": 12,
                 "titleFontWeight": "normal"
