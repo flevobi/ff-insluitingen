@@ -3,6 +3,7 @@
     "autosize": {
         "contains": "padding"
     },
+    "width": 400,
     "config": {
         "view": {
             "stroke": null
