@@ -16,16 +16,21 @@
       font-family: 'Fire sans', sans-serif;
       padding-left: 30px;
     }
+
     h1 {
       padding-top: 35px;
       padding-left: 8px;
       font-size: 17px;
     }
+
     #vis {
       width: 545px;
     }
+
     #bron {
-      padding-left: 8px;
+      margin-top: -15px;
+    }
+    #bron > a {
       font-size: 12px;
       text-decoration: none;
       color: black;
@@ -33,12 +38,13 @@
   </style>
   <h1 id="kop">Faillissementen per week in 2020 per provincie</h1>
   <div id="vis"></div>
-  <br>
-  <a id="bron" href="https://www.cbs.nl/nl-nl/maatwerk/2020/14/faillissementen-bedrijven-en-instellingen-2020" target="_blank">bron: CBS</a>
-
+  <div id="bron">
+    <a href="https://www.cbs.nl/nl-nl/maatwerk/2020/14/faillissementen-bedrijven-en-instellingen-2020"
+      target="_blank">Bron: CBS</a>
+  </div>
   <script type="text/javascript">
     var yourVlSpec = "failissementen_bullet_spec.json";
-    vegaEmbed('#vis', yourVlSpec, {'actions': false, 'renderer': 'svg'}).then(function(result) {
+    vegaEmbed('#vis', yourVlSpec, { 'actions': false, 'renderer': 'svg' }).then(function (result) {
       console.log(result);
     }).catch(console.error);
   </script>
