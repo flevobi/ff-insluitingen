@@ -16,31 +16,43 @@
       font-family: 'Fire sans', sans-serif;
       padding-left: 30px;
     }
+
     h1 {
       padding-left: 8px;
       padding-top: 35px;
       font-size: 17px;
     }
+
     #vis {
       width: 545px;
     }
+
     #bron {
+      display: block;
       padding-left: 8px;
       font-size: 12px;
       text-decoration: none;
       color: black;
+      position: relative;
     }
   </style>
   <h1 id="kop">Faillissementen per week in 2020 in Flevoland</h1>
   <div id="vis"></div>
-  <br>
-  <a id="bron" href="https://www.cbs.nl/nl-nl/maatwerk/2020/14/faillissementen-bedrijven-en-instellingen-2020" target="_blank">Bron: CBS</a>
+  <a id="bron" href="https://www.cbs.nl/nl-nl/maatwerk/2020/16/faillissementen-bedrijven-en-instellingen-2020"
+    target="_blank">Bron: CBS</a>
 
   <script type="text/javascript">
-    var yourVlSpec = "failissementen_bar_spec.json";
-    vegaEmbed('#vis', yourVlSpec, {'actions': false, 'renderer': 'svg'}).then(function(result) {
-      console.log(result);
-    }).catch(console.error);
+    if (/Trident\/|MSIE/.test(window.navigator.userAgent)) {
+      var e = document.getElementById('bron');
+      e.innerText = 'Internet Explorer is een verouderde browser, gebruik Edge, Firefox of Chrome om alles te zien.';
+      e.href = "https://tweakers.net/nieuws/148938/microsoft-raadt-bedrijven-af-nog-van-internet-explorer-gebruik-te-maken.html";
+    } else {
+      var vlSpec = "failissementen_bar_spec.json";
+      vegaEmbed('#vis', vlSpec, { 'actions': false, 'renderer': 'svg' }).then(function (result) {
+        console.log(result);
+      }).catch(console.error);
+
+    }
   </script>
 </body>
 
