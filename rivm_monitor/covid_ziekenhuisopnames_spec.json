@@ -1,0 +1,187 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.0.2.json",
+  "config": {
+    "legend": {
+      "labelFont": "sans-serif",
+      "labelColor": "gray"
+    },
+    "axisX": {
+      "labelColor": "gray",
+      "labelFont": "sans-serif",
+      "labelFontSize": 12,
+      "titleFont": "sans-serif",
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "titleColor": "gray"
+    },
+    "axisY": {
+      "labelColor": "gray",
+      "labelFont": "sans-serif",
+      "labelFontSize": 12,
+      "titleFont": "sans-serif",
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "titleColor": "gray"
+    }
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-geo/data-municipal/RIVM_NL_municipal.csv"
+  },
+  "transform": [
+    {
+      "filter": {
+        "and": [
+          {
+            "field": "Type",
+            "equal": "Ziekenhuisopname"
+          },
+          {
+            "field": "Gemeentecode",
+            "oneOf": [
+              34,
+              50,
+              171,
+              184,
+              303,
+              995
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "vconcat": [
+    {
+      "width": 320,
+      "mark": "line",
+      "title": "cumulatief aantal",
+      "encoding": {
+        "color": {
+          "field": "Gemeentenaam",
+          "legend": {
+            "title": "Gemeente"
+          },
+          "scale": {
+            "range": [
+              "#0067b1",
+              "#9b2590",
+              "#009fe3",
+              "#e6007e",
+              "#7bc142",
+              "#ffc424"
+            ]
+          },
+          "type": "nominal"
+        },
+        "opacity": {
+          "condition": {
+            "selection": "legendaSelectie",
+            "value": 1
+          },
+          "value": 0.2
+        },
+        "tooltip": [
+          {
+            "field": "Gemeentenaam",
+            "type": "nominal"
+          },
+          {
+            "field": "AantalCumulatief",
+            "type": "quantitative"
+          },
+          {
+            "field": "Datum",
+            "type": "temporal"
+          }
+        ],
+        "x": {
+          "field": "Datum",
+          "type": "temporal"
+        },
+        "y": {
+          "field": "AantalCumulatief",
+          "type": "quantitative",
+          "title": ""
+        }
+      },
+      "selection": {
+        "legendaSelectie": {
+          "bind": "legend",
+          "fields": [
+            "Gemeentenaam"
+          ],
+          "type": "multi"
+        },
+        "grid": {
+          "type": "interval", "bind": "scales"
+        }
+      }
+    },
+    {
+      "width": 320,
+      "mark": "bar",
+      "title": "aantal per dag",
+      "encoding": {
+        "color": {
+          "field": "Gemeentenaam",
+          "legend": {
+            "title": "Gemeente"
+          },
+          "scale": {
+            "range": [
+              "#0067b1",
+              "#9b2590",
+              "#009fe3",
+              "#e6007e",
+              "#7bc142",
+              "#ffc424"
+            ]
+          },
+          "type": "nominal"
+        },
+        "opacity": {
+          "condition": {
+            "selection": "legendaSelectie",
+            "value": 1
+          },
+          "value": 0.2
+        },
+        "tooltip": [
+          {
+            "field": "Gemeentenaam",
+            "type": "nominal"
+          },
+          {
+            "field": "Aantal",
+            "type": "quantitative"
+          },
+          {
+            "field": "Datum",
+            "type": "temporal"
+          }
+        ],
+        "x": {
+          "field": "Datum",
+          "type": "temporal"
+        },
+        "y": {
+          "field": "Aantal",
+          "type": "quantitative",
+          "title": ""
+        }
+      },
+      "selection": {
+        "legendaSelectie": {
+          "bind": "legend",
+          "fields": [
+            "Gemeentenaam"
+          ],
+          "type": "multi"
+        },
+        "grid": {
+          "type": "interval", "bind": "scales"
+        }
+      }
+    }
+  ]
+}
