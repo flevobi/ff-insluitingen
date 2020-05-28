@@ -5,6 +5,9 @@
       "labelFont": "sans-serif",
       "labelColor": "gray"
     },
+    "concat": {
+      "spacing": 50
+    },
     "axisX": {
       "labelColor": "gray",
       "labelFont": "sans-serif",
