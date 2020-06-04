@@ -3,7 +3,7 @@
     "autosize": {
         "contains": "padding"
     },
-    "width": 400,
+    "width": 390,
     "config": {
         "circle": {
             "color": "#0067b1",
@@ -51,7 +51,7 @@
             "sort": [ "1", "2", "3", "4", "5", "6", "7", "8", "9" ],
             "axis": {
                 "labelFont": "sans-serif",
-                "labelFontSize": 12,
+                "labelFontSize": 10,
                 "labelAngle": 0,
                 "labelColor": "gray",
                 "title": "weeknr",
@@ -80,9 +80,9 @@
             "axis": {
                 "labelFont": "sans-serif",
                 "title": null,
-                "labelFontSize": 12,
+                "labelFontSize": 10,
                 "labelAlign": "left",
-                "labelPadding": 90
+                "labelPadding": 75
             } 
         },
         "color": {
