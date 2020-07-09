@@ -15,11 +15,27 @@
     "data": {
         "url": "cbs_faillissementen_per_week.csv"
     },
-      "transform": [
-     {
-      "filter": "datum.provincie == 'Flevoland'"
-    }
-  ],
+    "transform": [
+        {
+            "calculate": "parseInt(datum.week)",
+            "as": "weeknr"
+        },
+        {
+            "joinaggregate": [{
+                "op": "max",
+                "field": "weeknr",
+                "as": "laatsteWeek"
+            }]
+        },
+        {
+            "filter": {
+                "and": [
+                    "datum.provincie == 'Flevoland'",
+                    "datum.weeknr > datum.laatsteWeek - 26"
+                ]
+            }
+        }
+    ],
     "selection": {
         "highlight": {
             "type": "single",
@@ -45,7 +61,17 @@
         "x": {
             "type": "nominal",
             "field": "week",
-            "sort": [ "1", "2", "3", "4", "5", "6", "7", "8", "9" ],
+            "sort": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9"
+            ],
             "axis": {
                 "labelFont": "sans-serif",
                 "labelFontSize": 12,
@@ -64,10 +90,10 @@
                 "labelFont": "sans-serif",
                 "title": null,
                 "labelFontSize": 12
-            } 
+            }
         },
         "color": {
-             "condition": {
+            "condition": {
                 "selection": "highlight",
                 "value": "rgb(158, 25, 129)"
             }

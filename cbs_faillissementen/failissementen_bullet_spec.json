@@ -13,6 +13,26 @@
     "data": {
         "url": "cbs_faillissementen_per_week.csv"
     },
+    "transform": [
+        {
+            "calculate": "parseInt(datum.week)",
+            "as": "weeknr"
+        },
+        {
+            "joinaggregate": [{
+                "op": "max",
+                "field": "weeknr",
+                "as": "laatsteWeek"
+            }]
+        },
+        {
+            "filter": {
+                "and": [
+                    "datum.weeknr > datum.laatsteWeek - 26"
+                ]
+            }
+        }
+    ],
     "selection": {
         "highlight": {
             "type": "single",
