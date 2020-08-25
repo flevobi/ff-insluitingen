@@ -95,7 +95,8 @@
           },
           {
             "field": "Datum",
-            "type": "temporal"
+            "type": "temporal",
+            "format": "%A %e %b"
           }
         ],
         "x": {
@@ -161,7 +162,8 @@
           },
           {
             "field": "Datum",
-            "type": "temporal"
+            "type": "temporal",
+            "format": "%A %e %b"
           }
         ],
         "x": {

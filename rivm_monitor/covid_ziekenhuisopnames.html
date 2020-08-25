@@ -42,13 +42,29 @@
     target="_blank">Bron: Coronawatch obv RIVM, bewerkig Prov. FL</a>
 
   <script type="text/javascript">
+
+    const embedOpt = {
+      'actions': false, 
+      'renderer': 'svg',
+      "timeFormatLocale": {
+        "dateTime": "%a %e %B %Y %T",
+        "date": "%d-%m-%Y",
+        "time": "%H:%M:%S",
+        "periods": ["AM", "PM"],
+        "days": ["zondag", "maandag", "dinsdag", "woensdag", "donderdag", "vrijdag", "zaterdag"],
+        "shortDays": ["zo", "ma", "di", "wo", "do", "vr", "za"],
+        "months": ["januari", "februari", "maart", "april", "mei", "juni", "juli", "augustus", "september", "oktober", "november", "december"],
+        "shortMonths": ["jan", "feb", "mrt", "apr", "mei", "jun", "jul", "aug", "sep", "okt", "nov", "dec"]
+      }
+    };
+
     if (/Trident\/|MSIE/.test(window.navigator.userAgent)) {
       var e = document.getElementById('bron');
       e.innerText = 'Internet Explorer is een verouderde browser, gebruik Edge, Firefox of Chrome om alles te zien.';
       e.href = "https://tweakers.net/nieuws/148938/microsoft-raadt-bedrijven-af-nog-van-internet-explorer-gebruik-te-maken.html";
     } else {
       var vlSpec = "covid_ziekenhuisopnames_spec.json";
-      vegaEmbed('#vis', vlSpec, { 'actions': false, 'renderer': 'svg' }).then(function (result) {
+      vegaEmbed('#vis', vlSpec, embedOpt).then(function (result) {
         console.log(result);
       }).catch(console.error);
 
