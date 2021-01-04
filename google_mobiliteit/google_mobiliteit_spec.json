@@ -1,0 +1,110 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.0.2.json",
+  "config": {
+    "legend": {
+      "labelFont": "sans-serif",
+      "labelColor": "gray"
+    },
+    "concat": {
+      "spacing": 50
+    },
+    "axisX": {
+      "labelColor": "gray",
+      "labelFont": "sans-serif",
+      "labelFontSize": 10,
+      "labelOverlap":"parity",
+      "titleFont": "sans-serif",
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "titleColor": "gray"
+    },
+    "axisY": {
+      "labelColor": "gray",
+      "labelFont": "sans-serif",
+      "labelFontSize": 12,
+      "titleFont": "sans-serif",
+      "titleFontSize": 12,
+      "titleFontWeight": "normal",
+      "titleColor": "gray"
+    }
+  },
+  "data": {
+    "url": "google_mobiliteit_per_week.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum.regio == 'Flevoland'"
+    }
+  ],
+  "mark": "bar",
+  "encoding": {
+    "color": {
+      "condition": {
+        "value": "rgb(158, 25, 129)",
+        "selection": "selectorX"
+      },
+      "value": "rgb(0, 103, 177)"
+    },
+    "facet": {
+      "columns": 2,
+      "type": "nominal",
+      "field": "mobiliteit",
+      "title": null,
+      "header": {
+        "labelAngle": 0,
+        "labelAlign": "center",
+        "labelFont": "sans-serif",
+        "labelFontSize": 15,
+        "labelOrient": "bottom",
+        "labelPadding": 20
+      },
+      "spacing": 40
+    },
+    "tooltip": [
+      {
+        "type": "nominal",
+        "field": "mobiliteit",
+        "title": "mobiliteispatroon"
+      },
+      {
+        "type": "nominal",
+        "field": "periode",
+        "title": "week"
+      },
+      {
+        "type": "quantitative",
+        "field": "verandering",
+        "format": ".1%"
+      }
+    ],
+    "x": {
+      "type": "nominal",
+      "field": "periode",
+      "axis": {
+        "labelExpr": "substring(datum.label, 5)",
+        "title": "weeknr.",
+        "orient": "top"
+      }
+    },
+    "y": {
+      "type": "quantitative",
+      "field": "verandering",
+      "axis": {
+        "title": null,
+        "format": "%"
+      }
+    }
+  },
+  "selection": {
+    "selectorX": {
+      "type": "single",
+      "encodings": [
+        "x"
+      ],
+      "on": "mouseover",
+      "empty": "none"
+    }
+  },
+  "height": 150,
+  "width": 440
+}
