@@ -1,5 +1,5 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v3.4.0.json",
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.0.2.json",
     "autosize": {
         "contains": "padding"
     },
@@ -17,7 +17,7 @@
     },
     "transform": [
         {
-            "calculate": "parseInt(datum.week)",
+            "calculate": "parseInt(datum.week_volgnr)",
             "as": "weeknr"
         },
         {
@@ -61,20 +61,10 @@
         "x": {
             "type": "nominal",
             "field": "week",
-            "sort": [
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9"
-            ],
             "axis": {
+                "labelExpr": "substring(datum.label, 5)",
                 "labelFont": "sans-serif",
-                "labelFontSize": 12,
+                "labelFontSize": 11,
                 "labelAngle": 0,
                 "labelColor": "gray",
                 "title": "weeknr",
