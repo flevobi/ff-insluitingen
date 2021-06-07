@@ -1,5 +1,5 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v4.0.2.json",
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.1.0.json",
   "config": {
     "legend": {
       "labelFont": "sans-serif",
@@ -28,30 +28,57 @@
     }
   },
   "data": {
-    "url": "https://raw.githubusercontent.com/J535D165/CoronaWatchNL/master/data-geo/data-municipal/RIVM_NL_municipal.csv"
+    "url": "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_cumulatief.csv",
+    "format": {
+      "type": "dsv",
+      "delimiter": ";"
+    }
   },
   "transform": [
-    {"calculate": "max(datum.Aantal, 0)", "as": "aantalcorr"},
     {
       "filter": {
         "and": [
           {
-            "field": "Type",
-            "equal": "Overleden"
+            "field": "Province",
+            "equal": "Flevoland"
           },
           {
-            "field": "Gemeentecode",
+            "field": "Municipality_code",
             "oneOf": [
-              34,
-              50,
-              171,
-              184,
-              303,
-              995
+              "GM0034",
+              "GM0050",
+              "GM0171",
+              "GM0184",
+              "GM0303",
+              "GM0995"
             ]
           }
         ]
       }
+    },{"sort": [
+      {"field": "Municipality_code", "order": "ascending"},
+      {"field": "Date_of_report", "order": "ascending"}
+      ]
+    },
+    {
+      "window": [
+        {
+          "op": "first_value",
+          "field": "Deceased",
+          "as": "prev"
+        }
+      ],
+      "groupby": ["Municipality_code"]
+      ,
+      "frame": [ -1, 0 ]
+    },     
+    { 
+      "calculate": "abs(toNumber(datum.prev) - toNumber(datum.Deceased))",
+      "as": "daily"
+    },
+    {
+      "calculate": "max(datum.Deceased, 0)",
+      "as": "aantalcorr"
     }
   ],
   "vconcat": [
@@ -61,7 +88,7 @@
       "title": "cumulatief aantal",
       "encoding": {
         "color": {
-          "field": "Gemeentenaam",
+          "field": "Municipality_name",
           "legend": {
             "title": "Gemeente"
           },
@@ -82,29 +109,33 @@
             "selection": "legendaSelectie",
             "value": 1
           },
-          "value": 0.2
+          "value": 0.07
         },
         "tooltip": [
           {
-            "field": "Gemeentenaam",
-            "type": "nominal"
+            "field": "Municipality_name",
+            "type": "nominal",
+            "title": "gemeente"
           },
           {
-            "field": "AantalCumulatief",
-            "type": "quantitative"
+            "field": "Deceased",
+            "type": "quantitative",
+            "title": "aantal"
           },
           {
-            "field": "Datum",
+            "field": "Date_of_report",
             "type": "temporal",
-            "format": "%A %e %b"
+            "format": "%A %e %b",
+            "title": "datum"
           }
         ],
         "x": {
-          "field": "Datum",
-          "type": "temporal"
+          "field": "Date_of_report",
+          "type": "temporal",
+          "title": "datum"
         },
         "y": {
-          "field": "AantalCumulatief",
+          "field": "Deceased",
           "type": "quantitative",
           "title": ""
         }
@@ -113,12 +144,13 @@
         "legendaSelectie": {
           "bind": "legend",
           "fields": [
-            "Gemeentenaam"
+            "Municipality_name"
           ],
           "type": "multi"
         },
         "grid": {
-          "type": "interval", "bind": "scales"
+          "type": "interval",
+          "bind": "scales"
         }
       }
     },
@@ -128,7 +160,7 @@
       "title": "aantal per dag",
       "encoding": {
         "color": {
-          "field": "Gemeentenaam",
+          "field": "Municipality_name",
           "legend": {
             "title": "Gemeente"
           },
@@ -149,29 +181,33 @@
             "selection": "legendaSelectie",
             "value": 1
           },
-          "value": 0.2
+          "value": 0.07
         },
         "tooltip": [
           {
-            "field": "Gemeentenaam",
-            "type": "nominal"
+            "field": "Municipality_name",
+            "type": "nominal",
+            "title": "gemeente"
           },
           {
-            "field": "Aantal",
-            "type": "quantitative"
+            "field": "daily",
+            "type": "quantitative",
+            "title": "aantal"
           },
           {
-            "field": "Datum",
+            "field": "Date_of_report",
             "type": "temporal",
-            "format": "%A %e %b"
+            "format": "%A %e %b",
+            "title": "datum"
           }
         ],
         "x": {
-          "field": "Datum",
-          "type": "temporal"
+          "field": "Date_of_report",
+          "type": "temporal",
+          "title": "datum"
         },
         "y": {
-          "field": "aantalcorr",
+          "field": "daily",
           "type": "quantitative",
           "title": ""
         }
@@ -180,12 +216,13 @@
         "legendaSelectie": {
           "bind": "legend",
           "fields": [
-            "Gemeentenaam"
+            "Municipality_name"
           ],
           "type": "multi"
         },
         "grid": {
-          "type": "interval", "bind": "scales"
+          "type": "interval",
+          "bind": "scales"
         }
       }
     }
